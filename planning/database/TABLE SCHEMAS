@@ -1,0 +1,72 @@
+TABLE SCHEMAS
+
+||FIELD TYPE :  FIELD NAME|||
+
+
+RESOURCES
+
+
+pk      id
+string  title
+string  url
+text    description
+integer category-id
+time    timestamp
+integer rating-id
+integer created-by
+integer tags-id
+
+
+FOLLOW-USER
+
+pk      id
+integer user-id
+integer following-user-id
+
+RATINGS
+
+pk      id
+integer resource-id
+integer rating
+
+
+LIKES
+
+pk      id
+integer resource-id
+integer user-id (the person pressed like)
+
+USERS
+
+pk     id
+string email
+string password
+string handle
+string avatar  // optional** (link to avatar img);
+
+CATEGORIES
+
+pk     id
+string name
+
+
+COMMENTS
+pk      id
+integer resource-id
+string  content
+time    timestamp
+integer user-id
+
+
+THUMBNAILS ***OPTIONAL
+pk      id
+integer resource-id
+
+TAGS
+pk      id
+string  name
+
+RESOURCE-TAGS
+pk      id
+integer resource-id
+integer tag-id
