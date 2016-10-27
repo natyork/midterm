@@ -13,8 +13,7 @@ text    description
 integer category-id
 time    timestamp
 integer rating-id
-integer created-by
-integer tags-id
+integer created-by //this point the user id who created this resource
 
 
 FOLLOW-USER
