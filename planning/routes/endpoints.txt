@@ -1,0 +1,10 @@
+Page / Action     | Endpoint
+--------------------------------------------------------------------
+Landing Page      | Get / (render landing page)
+Login             | POST / & redirect to GET /cards
+Register          | GET /register, POST /register & redirect to GET /cards
+Home (Logged in)  | GET /cards  (render home, shows all cards)
+Single cards      | GET /card/:id
+User Profile      | GET /user/:id (if logged in, can edit, delete cards, else can only view cards)
+Search            | POST /cards?
+Logout            | POST /logout
