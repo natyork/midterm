@@ -20,7 +20,12 @@ router.use(bodyParser.urlencoded({
 router.post("/home/resources/new", (req, res) => {
   if(req.session["user-id"]) {
     //encode all text in obj
-    var reqObj = valid.encodeText(req.body.params);
+    const category = db.encodeText(req.body.category);
+    const title = db.encodeText(req.body.title);
+    const url = db.encodeText(req.body.url);
+    const thumburl = db.encodeText(req.body.thumburl);
+    const description = db.encodeText(req.body.description);
+
     console.log(reqObj, "this is the reqObj");
 
 
