@@ -1,7 +1,6 @@
 
 $(document).ready(function () {
 
-
   $(".login").on("submit", function(event) {
     event.preventDefault();
     var email = $(this).find("input[type='email']");
@@ -19,7 +18,15 @@ $(document).ready(function () {
         url: "/login",
         method: "POST",
         data: params
-      })
+      }).then(function (response) {
+          if (response.resStatus !== 200) {
+            $("#errorMessage")
+            .toggle().children()
+            .text(response.msg);
+          } else {
+            console.log(response, "success");
+          }
+        });
     }
 
     clearFieldByVal(pw);
