@@ -52,7 +52,13 @@ app.use("/api/resources", resourcesRoutes(knex));
 app.get("/", (req, res) => {
   res.render("index");
 });
+<<<<<<< HEAD
 
+=======
+app.get("/home", (req, res) => {
+  res.render("resources"); //resources.ejs
+});
+>>>>>>> aeca3b69cd463cd8b99190fdbd12fd13afbdad5b
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });

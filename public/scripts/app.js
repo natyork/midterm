@@ -1,38 +1,62 @@
 
 $(function() {
 
-  function createResourceElement(resource) {
+  function createResourceElement(resource) { //params are objects for info required
     var $resource = $("<article>").addClass("resource");
     var $header = $("<header>");
     var $thumbnail = $("<img>").addClass("thumbnail").attr("src", resource.thumbnail);
     var $iconHeart = $("<i>").attr({"class": "fa fa-heart", "aria-hidden": "true"});
-    var $visit = $("<h2>").addClass("user").text(resource.url);
-    var $user = $("<h2>").addClass("user").text(resource.created_by); //part of user database....
-    var $handle = $("<span>").addClass("handle").text(td.user.handle);
-    var $title = $("<div>").text(td.content.text);
-    var $category = $("<div>").text(td.content.text);
-
+    // var $visit_div = $("<div>").addClass("visit").text("visit");
+    // var $visit = $("<a>").attr("href"=resource.url).append($visit_div);
+    var $content = $("<section>").addClass("content");
+    var $title = $("<div>").addClass("title").text(resource.title);
+    var $user = $("<div>").addClass("user").text(resource.created_by); //(id) ref user database....
+    var $category = $("<div>").addClass("category").text("Learning"); // need to pull in categor (id) ref category database
     var $footer = $("<footer>");
+    var $comments = $("<div>").addClass("comments").text("awesome resource"); //need to pull in comments
 
 
-    $header = $header.append($avatar).append($user).append($handle);
-    $footer = $footer.append($createdAt).append($iconHeart).append($iconRetweet).append($iconFlag);
+    $header = $header.append($thumbnail).append($iconHeart) //.append($visit);
+    $content = $content.append($title).append($user).append($category)
+    $footer = $footer.append($comments);
 
-    $tweet = $tweet.append($header).append($content).append($footer);
+    $resource = $resource.append($header).append($content).append($footer);
 
-    return $tweet;
+    return $resource;
+  }
+  function renderResources(arr) {
+    // console.log(arr);
+    for (i in arr) {
+      var resource = arr[i];
+      var $resource = createResourceElement(resource);
+      $('#resource-container').prepend($resource);
+    }
   }
 
+  function loadResources(allResources) {
+    var allOfTheResources = $.ajax({
+      method: 'get',
+      url: "/api/resources",
+      data: $(this).serialize(),
+      dataType: 'json'
+    });
 
-// $.ajax({
-//     method: "GET",
-//     url: "/api/resources"
-//   }).done((users) => {
-//     for(resource of resources) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
+    allOfTheResources.done(function(data) {
+      var dL = data.length;
+      console.log(data);
+      // var start = dL-1;
+      var singleResource = [data[data.length-1]];
+      console.log('single resource', singleResource);
+      console.log("the data",data);
+      if (allResources === true) {
+      renderResources(data);
+      } else if (allResources === false){
+      renderResources(singleResource);
+      }
+    });
+  }
 
+  loadResources(true);
 
 });
 
