@@ -34,7 +34,6 @@ router.post("/login", (req, res) => {
         responseObj["resStatus"] = 200;
         responseObj["msg"] = "Oh no!";
         responseObj["userid"] = result.id;
-        responseObj["user-name"] = result.name;
         responseObj["user-handle"] = result.handle;
         console.log("success");
         res.json(responseObj);
