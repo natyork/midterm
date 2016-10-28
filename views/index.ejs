@@ -9,29 +9,30 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
   </head>
 
   <body>
 
 
     <section>
-      <form action="/login" method="POST">
+      <form class="login" action="/login">
         <div class="form-control">
            <label for="email">Email</label>
-           <input type="text" value="email"  placeholder="enter your email">
+           <input type="email" placeholder="enter your email">
         </div>
         <div class="form-control">
             <label for="password">password</label>
-            <input type="password" value="password">
+            <input type="password" placeholder="123abcd">
 
         </div>
-        <input class="btn btn-default" type="submit" name="" value="login">
+        <input class="btn btn-defaul" type="submit" name="" value="login">
       </form>
       <p>Don't have an account? <span> join the club:) </span></p>
     </section>
 
 
-
+  <script type="text/javascript" src="/scripts/main-log.js"></script><script type="text/javascript" src="/scripts/utils/text-utils.js"></script>
 
   </body>
 </html>
