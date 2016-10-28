@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 app.get("/home", (req, res) => {
-  res.render("resources");
+  res.render("resources"); //resources.ejs
 });
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
