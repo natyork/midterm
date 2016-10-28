@@ -23,6 +23,7 @@ const resourcesRoutes = require("./routes/resources");
 
 app.use(require('./routes/ajax/login'));
 app.use(require('./routes/ajax/home'));
+app.use(require('./routes/ajax/resources-new'));
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.

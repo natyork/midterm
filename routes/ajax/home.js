@@ -6,7 +6,7 @@
 const express = require('express');
 const router  = express.Router();
 const bodyParser = require('body-parser');
-const db = require("../../lib/database/knex.js");
+const db = require("../../lib/database/user-queries.js");
 //const response = require("../../lib/server/response.js");
 const cookieSession = require('cookie-session');
 
