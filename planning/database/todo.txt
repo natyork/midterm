@@ -1,0 +1,1 @@
+do a migration to update username constraint to be UNIQUE

@@ -19,10 +19,10 @@
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
-      <span class="header">Tweeter</span>
+      <span class="header">Pinterest RipOff</span>
       <div class="compose">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-        <span>Compose</span>
+        <span>Something</span>
       </div>
     </nav>
 
@@ -30,9 +30,14 @@
     <main class="container">
 
       <section class="new-resource">
-        <h2>Compose Tweet</h2>
+
+        <h2>Add New Resource</h2>
         <form action="/resources" method="POST">
-          <textarea name="text" placeholder="Resource stuff"></textarea>
+          <textarea name="title" placeholder="title"></textarea>
+          <textarea name="url" placeholder="url"></textarea>
+          <textarea name="description" placeholder="description"></textarea>
+          <textarea name="thumbnail" placeholder="thumbnailurl"></textarea>
+
           <input type="submit" value="Add">
         </form>
       </section>
