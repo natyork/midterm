@@ -9,6 +9,7 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
   </head>
 
   <body>
@@ -18,6 +19,28 @@
 
 
 
+    <section>
+      <form class="login" action="/login">
+        <div class="form-control">
+           <label for="email">Email</label>
+           <input type="email" placeholder="enter your email">
+        </div>
+        <div class="form-control">
+            <label for="password">password</label>
+            <input type="password" placeholder="123abcd">
+
+        </div>
+        <input class="btn btn-defaul" type="submit" name="" value="login">
+      </form>
+      <p>Don't have an account? <span> join the club:) </span></p>
+        <div id="errorMessage">
+          <spanc role="alert" class="alert alert-danger"></span>
+        </div>
+    </section>
+
+
+
+  <script type="text/javascript" src="/scripts/main-log.js"></script><script type="text/javascript" src="/scripts/utils/text-utils.js"></script>
 
   </body>
 </html>
