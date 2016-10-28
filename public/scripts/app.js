@@ -4,26 +4,27 @@ $(function() {
   function createResourceElement(resource) { //params are objects for info required
     var $resource = $("<article>").addClass("resource");
     var $header = $("<header>");
-    var $thumbnail = $("<img>").addClass("thumbnail").attr("src", resource.thumbnail);
+    var $thumbnail = $("<img>").addClass("thumbnail").attr("src", resource.path);
     var $iconHeart = $("<i>").attr({"class": "fa fa-heart", "aria-hidden": "true"});
-    // var $visit_div = $("<div>").addClass("visit").text("visit");
-    // var $visit = $("<a>").attr("href"=resource.url).append($visit_div);
+    var $visit = $("<a>").attr("href", resource.url).text("Link");
     var $content = $("<section>").addClass("content");
     var $title = $("<div>").addClass("title").text(resource.title);
-    var $user = $("<div>").addClass("user").text(resource.created_by); //(id) ref user database....
-    var $category = $("<div>").addClass("category").text("Learning"); // need to pull in categor (id) ref category database
+    var $description = $("<div>").addClass("description").text(resource.description);
+    var $user = $("<div>").addClass("user").text(resource.handle);
+    var $category = $("<div>").addClass("category").text(resource.name);
     var $footer = $("<footer>");
-    var $comments = $("<div>").addClass("comments").text("awesome resource"); //need to pull in comments
+    // var $comments = $("<section>").addClass("comment-container"); //need to pull in comments
 
 
-    $header = $header.append($thumbnail).append($iconHeart) //.append($visit);
-    $content = $content.append($title).append($user).append($category)
-    $footer = $footer.append($comments);
+    $header = $header.append($thumbnail).append($iconHeart).append($visit);
+    $content = $content.append($title).append($description).append($user).append($category)
+    // $footer = $footer.append($comments);
 
     $resource = $resource.append($header).append($content).append($footer);
 
     return $resource;
   }
+
   function renderResources(arr) {
     // console.log(arr);
     for (i in arr) {
