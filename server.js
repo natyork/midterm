@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 app.get("/home", (req, res) => {
-  res.send("home");
+  res.render("resources");
 });
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
