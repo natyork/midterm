@@ -1,25 +1,16 @@
 
 $(function() {
 
-  $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done((users) => {
-    for(user of users) {
-      $("<div>").text(user.name).appendTo($("body"));
-    }
-  });;
-
-
   function createResourceElement(resource) {
     var $resource = $("<article>").addClass("resource");
     var $header = $("<header>");
-    var $thumbnail = $("<img>").addClass("thumbnail").attr("src", resource.thumbnail); //src?
+    var $thumbnail = $("<img>").addClass("thumbnail").attr("src", resource.thumbnail);
     var $iconHeart = $("<i>").attr({"class": "fa fa-heart", "aria-hidden": "true"});
-    var $visit = $("<h2>").addClass("user").text(resource.url));
-    var $user = $("<h2>").addClass("user").text(td.user.name);
+    var $visit = $("<h2>").addClass("user").text(resource.url);
+    var $user = $("<h2>").addClass("user").text(resource.created_by); //part of user database....
     var $handle = $("<span>").addClass("handle").text(td.user.handle);
     var $title = $("<div>").text(td.content.text);
+    var $category = $("<div>").text(td.content.text);
 
     var $footer = $("<footer>");
 
