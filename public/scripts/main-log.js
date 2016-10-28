@@ -5,14 +5,15 @@ $(document).ready(function () {
     event.preventDefault();
     var email = $(this).find("input[type='email']");
     var pw = $(this).find("input[type='password']");
-
-    if(checkValidText(pw.val()) && checkValidText(email.val())) {
+    var testArray = [email, pw];
+    if(checkValidText(testArray)) {
       //encode text and send to ajax;
-      email.val(encodeText(email.val()));
-      pw.val(encodeText(pw.val()));
+      var encodedArr = encodeText(testArray);
+      // email.val(encodeText(email.val()));
+      // pw.val(encodeText(pw.val()));
       var params = {
-        email: email.val(),
-        pw: pw.val()
+        email: encodedArr[0].val(),
+        pw: encodedArr[1].val()
       }
       $.ajax({
         url: "/login",
@@ -30,8 +31,8 @@ $(document).ready(function () {
         });
     }
 
-    clearFieldByVal(pw);
-    clearFieldByVal(email);
+    clearFieldByVal(testArray);
+
 
   });
   //sorts the cards loaded at /home according the the query string
