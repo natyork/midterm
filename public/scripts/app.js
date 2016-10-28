@@ -24,14 +24,14 @@ $(function() {
   }
 
 
-$.ajax({
-    method: "GET",
-    url: "/api/resources"
-  }).done((users) => {
-    for(resource of resources) {
-      $("<div>").text(user.name).appendTo($("body"));
-    }
-  });;
+// $.ajax({
+//     method: "GET",
+//     url: "/api/resources"
+//   }).done((users) => {
+//     for(resource of resources) {
+//       $("<div>").text(user.name).appendTo($("body"));
+//     }
+//   });;
 
 
 });

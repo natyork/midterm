@@ -25,6 +25,7 @@ $(document).ready(function () {
             .text(response.msg);
           } else {
             console.log(response, "success");
+            window.location.assign(response.url);
           }
         });
     }
@@ -33,7 +34,7 @@ $(document).ready(function () {
     clearFieldByVal(email);
 
   });
-
+  //sorts the cards loaded at /home according the the query string
 
 
 

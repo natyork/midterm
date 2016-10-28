@@ -40,14 +40,15 @@ router.post("/login", (req, res) => {
         res.json(responseObj);
       } else {
         //set cookie by id
-        req.session.id = result.id;
+        req.session["user-id"] = result.id;
         //succesful login responds with status, msg as well
         //as the relevant user information selected from the db
         responseObj["resStatus"] = 200;
-        responseObj["msg"] = "Oh no!";
+        responseObj["msg"] = "logged in!";
         responseObj["userid"] = result.id;
         responseObj["user-handle"] = result.handle;
-        console.log("success");
+        responseObj["url"] = "./home?sort=id";
+        console.log("success @ /login");
         res.json(responseObj);
       }
     });

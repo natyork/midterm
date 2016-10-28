@@ -22,6 +22,7 @@ const resourcesRoutes = require("./routes/resources");
 
 
 app.use(require('./routes/ajax/login'));
+app.use(require('./routes/ajax/home'));
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -51,9 +52,7 @@ app.use("/api/resources", resourcesRoutes(knex));
 app.get("/", (req, res) => {
   res.render("index");
 });
-app.get("/home", (req, res) => {
-  res.render("resources");
-});
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });

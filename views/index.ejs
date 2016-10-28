@@ -16,13 +16,13 @@
 
 
     <section>
-      <form class="login" action="/login">
+      <form class="login" action="/login" method="post">
         <div class="form-control">
            <label for="email">Email</label>
            <input type="email" placeholder="enter your email">
         </div>
         <div class="form-control">
-            <label for="password">password</label>
+            <label for="pw">password</label>
             <input type="password" placeholder="123abcd">
 
         </div>
@@ -30,7 +30,7 @@
       </form>
       <p>Don't have an account? <span> join the club:) </span></p>
         <div id="errorMessage">
-          <spanc role="alert" class="alert alert-danger"></span>
+          <spanc role="alert" class="alert alert-danger">Error! incorrect username or password!</span>
         </div>
     </section>
 
