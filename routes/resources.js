@@ -21,9 +21,10 @@ module.exports = function (knex) {
 // ************************************************************************
 
   router.get("/filter", (req, res) => {
+    let search = req.query.search;
     knex
       .select("categories.*")
-      .from("categories").whereRaw('LOWER(categories.name) LIKE ?', '%'+("BILL").toLowerCase()+'%')
+      .from("categories").whereRaw('LOWER(categories.name) LIKE ?', '%'+search.toLowerCase()+'%')
       .then((results) => {
         res.json(results);
         console.log(results);
