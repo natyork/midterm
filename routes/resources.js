@@ -37,6 +37,23 @@ module.exports = function (knex) {
     });
   });
 
+
+  // ************************************************************************
+
+  router.get("/resources/?query", (req, res) => {
+    knex
+      .select("catergories.*")
+      .from("categories").where("categories.name", "like", "%bill%")
+      .then((results) => {
+        res.json(results);
+        console.log(results);
+    });
+  });
+  // ************************************************************************
+
+
+
+
   return router;
 }
 
