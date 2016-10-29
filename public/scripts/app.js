@@ -2,13 +2,14 @@
 $(function() {
 
   function createResourceElement(resource) { //params are objects for info required
-    var $resource = $("<article>").addClass("resource grid-item col-sm-6 col-md-4"); //
+    var $resource = $("<article>").addClass("resource grid-item col-sm-6 col-md-4");
+    $resource.attr({"data-resourceid" : resource.id});
     var $thumbnail = $("<div>").addClass("thumbnail");
     var $img = $("<img>").addClass("thumbnail-img").attr("src", resource.path);
     var $caption = $("<div>").addClass("caption")
     var $title = $("<h3>").text(resource.title);
     var $description = $("<p>").addClass("description").text(resource.description);
-    var $iconHeart = $("<span>").attr({"class": "glyphicon glyphicon-heart", "aria-hidden": "true"});
+    var $iconHeart = $("<span>").attr({"class": "glyphicon glyphicon-heart", "aria-hidden": "true", "data-isToggled" : false, "onclick" : "setLike(event)"});
     var $visit = $("<a>").attr("href", resource.url).text("Link");
     var $user = $("<div>").addClass("user").text(resource.handle);
     var $category = $("<div>").addClass("category").text(`Category: ${resource.name}`);
@@ -61,4 +62,30 @@ $(function() {
   loadResources(true);
 
 });
+
+//called when the heart button is clicked on the tweet
+//the color is toggled via a data element attribute on the heart icon element
+//called isToggled. This  attribute is repsonsible for the respective ajax call to server
+//when the heart is clicked
+function setLike(event) {
+  var resourceid = $(event.target).closest("article").data("resourceid");
+  var params = new Object();
+    params["resource-id"] = resourceid;
+    params["isLiked"] = $(event.target).data("istoggled");
+    $.ajax({
+        url: `/home/resources/${resourceid}/like`,
+        method: "POST",
+        data: params,
+        success: function(data) {
+          if($(event.target).data("istoggled")) {
+            $(event.target).css("color", "black");
+            $(event.target).data("istoggled", false);
+          } else {
+            $(event.target).css("color", "red");
+            $(event.target).data("istoggled", true);
+          }
+        }
+    });
+
+}
 
