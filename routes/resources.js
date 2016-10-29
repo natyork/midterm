@@ -23,7 +23,6 @@ module.exports = function (knex) {
       .innerJoin("users", "resources.created-by", "users.id")
       .then((results) => {
         res.json(results);
-        console.log(results);
     });
   });
 
@@ -33,7 +32,6 @@ module.exports = function (knex) {
       .from("comments").where({"resource-id": req.params.id})
       .then((results) => {
         res.json(results);
-        console.log(results);
     });
   });
 
