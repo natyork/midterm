@@ -23,12 +23,21 @@ $(document).ready(function () {
         params.url = testObj.url.val();
         params.thumburl = testObj.thumburl.val();
         params.description = testObj.description.val();
-
+        //post to database with params object
         $.ajax({
           method: "POST",
           url: "/home/resources/new",
           data: params
-        })
+        }).then(function (response) {
+          if (response.resStatus !== 200) {
+            //need to have this modify a dom element on page****
+            console.log(response.msg);
+          } else {
+            //on success window is redirected back to home page
+            console.log(response, "success");
+            window.location.assign(response.url);
+          }
+        });
       }
       //needs to be more specifc but for now both error messages for thumburl
       //field and url field will toggle
