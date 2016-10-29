@@ -2,7 +2,7 @@
 $(function() {
 
   function createResourceElement(resource) { //params are objects for info required
-    var $resource = $("<article>").addClass("resource grid-item col-sm-6 col-md-4");
+    var $resource = $("<article>").addClass("resource grid-item col-sm-6 col-md-4"); //
     var $thumbnail = $("<div>").addClass("thumbnail");
     var $img = $("<img>").addClass("thumbnail-img").attr("src", resource.path);
     // var $iconHeart = $("<i>").attr({"class": "fa fa-heart", "aria-hidden": "true"});
@@ -49,18 +49,20 @@ $(function() {
 
   function renderResources(arr) {
 
-  // $('.grid').masonry({
-  //   columnWidth: 200,
-  //   itemSelector: '.grid-item'
-  // });
+
   // Masonry has been initialized, okay to call methods
 
     // console.log(arr);
     for (i in arr) {
       var resource = arr[i];
       var $resource = createResourceElement(resource);
+  //     $('.grid').masonry({
+  //   columnWidth: 200,
+  //   itemSelector: '.grid-item'
+  // });
       // $grid.append( $resource)
       // .masonry( 'appended', $resource );
+      // $grid.masonry( 'prepended', $resource);
       $('.resource-row').prepend($resource);
     }
   }
