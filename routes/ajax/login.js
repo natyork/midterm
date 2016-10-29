@@ -57,7 +57,10 @@ router.post("/login", (req, res) => {
       res.json(responseObj);
   }
 });
-
+router.post("/logout", (req, res) => {
+  req.session = null;
+  res.redirect("/");
+});
 //**let client handle redirects
 module.exports = router;
 
