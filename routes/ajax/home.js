@@ -32,7 +32,6 @@ router.get("/home", (req, res) => {
           avatar: user.avatar,
           id: user.id
         }
-      console.log(user, "this is the user");
       res.render("resources", templateVars);
      });
     console.log(req.query, " success @ /home");
