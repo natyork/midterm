@@ -5,14 +5,6 @@ const router  = express.Router();
 
 module.exports = function (knex) {
 
-  router.get("/:id", (req, res) => {
-    knex
-      .select("*")
-      .from("resources").where({id: req.params.id})
-      .then((results) => {
-        res.json(results);
-    });
-  });
 
   router.get("/", (req, res) => {
     knex
@@ -26,6 +18,19 @@ module.exports = function (knex) {
     });
   });
 
+// ************************************************************************
+
+  router.get("/filter", (req, res) => {
+    knex
+      .select("categories.*")
+      .from("categories").where('categories.name', 'like', '%Bill%')
+      .then((results) => {
+        res.json(results);
+        console.log(results);
+    });
+  });
+// ************************************************************************
+
   router.get("/comments/:id", (req, res) => {
     knex
       .select("comments.*")
@@ -35,19 +40,14 @@ module.exports = function (knex) {
     });
   });
 
-
-  // ************************************************************************
-
-  router.post("/resources/", (req, res) => {
+  router.get("/:id", (req, res) => {
     knex
-      .select("catergories.*")
-      .from("categories").where("categories.name", "like", "%bill%")
+      .select("*")
+      .from("resources").where({id: req.params.id})
       .then((results) => {
         res.json(results);
-        console.log(results);
     });
   });
-  // ************************************************************************
 
 
 
