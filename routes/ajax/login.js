@@ -22,7 +22,6 @@ router.use(cookieSession({
 }));
 
 
-
 //grab information from submit and begins validation process
 router.post("/login", (req, res) => {
   const email = req.body.email.trim();

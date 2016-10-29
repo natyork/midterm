@@ -5,15 +5,17 @@ $(document).ready(function () {
     event.preventDefault();
     var email = $(this).find("input[type='email']");
     var pw = $(this).find("input[type='password']");
-    var testArray = [email, pw];
-    if(checkValidText(testArray)) {
+    var testObj = {
+      email : email,
+      pw: pw
+    }
+    if(checkValidText(testObj)) {
       //encode text and send to ajax;
-      var encodedArr = encodeText(testArray);
       // email.val(encodeText(email.val()));
       // pw.val(encodeText(pw.val()));
       var params = {
-        email: encodedArr[0].val(),
-        pw: encodedArr[1].val()
+        email: testObj.email.val(),
+        pw: testObj.pw.val()
       }
       $.ajax({
         url: "/login",
@@ -21,7 +23,7 @@ $(document).ready(function () {
         data: params
       }).then(function (response) {
           if (response.resStatus !== 200) {
-            $("#errorMessage")
+            $(".errorMessage")
             .toggle().children()
             .text(response.msg);
           } else {
@@ -31,7 +33,7 @@ $(document).ready(function () {
         });
     }
 
-    clearFieldByVal(testArray);
+    clearFieldByVal(testObj);
 
 
   });

@@ -1,28 +1,39 @@
 
 
 //santize text
-function encodeText(arrayIN) {
-  arrayIN.forEach(function(string) {
-    let stringText = string.val();
-    stringText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    return string.val(stringText);
-  });
-  return arrayIN;
+function encodeText(objIN) {
+  for(property in objIN) {
+    var string = objIN[property].val();
+    string = string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    objIN[property].val(string);
+  }
+  return objIN;
 }
 
-function checkValidText(arrayIN) {
+function checkValidText(objIN) {
   //trim whitespace
-  arrayIN.forEach(function(string) {
-    return string.val(string.val().trim());
-    if(string.val() < 1) {
+  for(property in objIN) {
+    objIN[property].val(objIN[property].val().trim())
+    if(objIN[property].length < 1) {
       return false;
     }
-  });
+  }
   return true;
 }
 
-function clearFieldByVal(arrayIN) {
-    arrayIN.forEach(function(string) {
-      return string.val("");
-    });
+function clearFieldByVal(objIN) {
+  for(property in objIN) {
+    objIN[property].val("");
+  }
+}
+
+function checkValidUrl(urlIn) {
+  var regex = new RegExp(/w{3}\.[a-z0-9]+\.[\w]{2,4}/, 'i');
+  var isValid = regex.test(urlIn)
+  return isValid
+}
+function checkValidImgUrl(urlIn) {
+  var regex = new RegExp(/[a-z0-9]+\.[\w]{2,4}/, 'i');
+  var isValid = regex.test(urlIn)
+  return isValid
 }
