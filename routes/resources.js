@@ -40,7 +40,7 @@ module.exports = function (knex) {
 
   // ************************************************************************
 
-  router.get("/resources/?query", (req, res) => {
+  router.post("/resources/", (req, res) => {
     knex
       .select("catergories.*")
       .from("categories").where("categories.name", "like", "%bill%")
