@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+    <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- External Styles -->
+ <!--  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" /> -->
+  <link rel="stylesheet" href="/styles/style.css" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- External Scripts -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="/scripts/dashboard.js"></script>
+  <script type="text/javascript" src="/scripts/like.js"></script>
+
+</head>
+
+<body>
+  <main class="container">
+    <header>
+          <% include ./partials/_nav %>
+    </header>
+
+
+
+ <section  data-id="<%=user%>" class="jumbotron text-xs-center user">
+      <div class="container">
+        <h1 class="jumbotron-heading"></h1>
+        <p class="lead text-muted">you have these many resources,
+        you've liked these many pages.</p>
+        <p>
+          <a href="/home/resources/new" class="btn btn-primary">make a resource</a>
+          <a href="/home" class="btn btn-secondary">back home</a>
+        </p>
+      </div>
+    </section>
+
+<div class="album text-muted">
+  <div class="container">
+    <h1>My Resources</h1>
+    <div class="row resource-row"></div>
+    <h1>Liked Resources</h1>
+    <div class="row likes-row">
+
+    </div>
+  </div>
+  </main>
+</body>
+
+</html>

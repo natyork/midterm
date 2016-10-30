@@ -7,11 +7,11 @@ module.exports = (knex) => {
 
   router.get("/:id", (req, res) => {
     knex
-      .select("*")
+      .select("handle", "avatar", "email", "id")
       .from("users")
       .where({id: req.params.id})
       .then((results) => {
-        res.json(results);
+        res.json(results[0]);
     });
   });
 

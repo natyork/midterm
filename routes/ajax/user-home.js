@@ -6,7 +6,11 @@
 const express = require('express');
 const router  = express.Router();
 const bodyParser = require('body-parser');
-const db = require("../../lib/database/user-queries.js");
+const userQuery = require("../../lib/database/user-queries.js");
+const catQuery = require("../../lib/database/categories-queries.js");
+const resQuery = require("../../lib/database/resource-queries.js");
+const thumbQuery = require("../../lib/database/thumbnail-queries.js");
+const likeQuery = require("../../lib/database/like-queries.js");
 //const response = require("../../lib/server/response.js");
 const cookieSession = require('cookie-session');
 
@@ -21,21 +25,13 @@ router.use(cookieSession({
   secret: "liamneeson"
 }));
 
-
-router.get("/home", (req, res) => {
-  // add validation
+router.get("/home/user/:id/", (req, res) => {
   if(req.session["user-id"]) {
-    console.log(req.session["user-id"], "this is the id!\n\n\n");
-     db.findUserById(req.session["user-id"],(err, user) => {
-      res.render("resources", {
-        user: user.id,
-        avatar: user.avatar
-      });
-     });
-    console.log(req.query, " success @ /home");
+    const userid = req.params.id;
+    res.render("user_show", {user: userid});
   } else {
     res.redirect(403, "/");
   }
-});
+})
 
 module.exports = router;
