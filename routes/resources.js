@@ -22,31 +22,29 @@ module.exports = function (knex) {
 // start************************************************************************
 
   router.get("/filter", (req, res) => {
-    let searchword = (req.query.search).split(" ");
+    let searchword = req.query.search.split(" ");
     console.log(searchword);
     let query = knex
-      .select()
-      .from("categories")
+      .select("resources.*", "thumbnails.path", "categories.name", "users.handle")
+      .from("resources")
+      .innerJoin("thumbnails", "resources.id", "thumbnails.resource-id")
+      .innerJoin("categories", "resources.category-id", "categories.id")
+      .innerJoin("users", "resources.created-by", "users.id")
 
-    // let condition = "";
-    // let escape =[]
 
     for (var i in searchword) {
-
       query.orWhere('categories.name', 'ILIKE', '%'+searchword[i]+'%')
+    }
 
-}
+    query.then((results) => {
+      console.log(results);
+      res.json(results);
 
+    });
 
-
-      query.then((results) => {
-        //iterate over results to remove duplicates?
-        res.json(results);
-
-        console.log(results.toString());
-      });
 
   });
+
 
 
 // end************************************************************************

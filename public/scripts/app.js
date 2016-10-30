@@ -34,7 +34,7 @@ $(function() {
     }
   }
 
-  function loadResources(allResources) {
+  function loadResources() {
     var allOfTheResources = $.ajax({
       method: 'get',
       url: "/api/resources",
@@ -43,23 +43,43 @@ $(function() {
     });
 
     allOfTheResources.done(function(data) {
-      var dL = data.length;
-      console.log(data);
-      // var start = dL-1;
-      var singleResource = [data[data.length-1]];
-      console.log('single resource', singleResource);
-      console.log("the data",data);
-      if (allResources === true) {
       renderResources(data);
-      } else if (allResources === false){
-      renderResources(singleResource);
-      }
     });
   }
 
+  loadResources();
+
+  function clearResources(){
+    $("article").remove();
+  }
 
 
-  loadResources(true);
+ $('.search-form').on("submit", function(event) {
+    event.preventDefault();
+
+    var searchSubmit = $.ajax({
+      method: 'get',
+      url: '/api/resources/filter',
+      data: $(this).serialize(),
+      dataType: 'json'
+
+    });
+
+    searchSubmit.done(function(data){
+      clearResources();
+      renderResources(data);
+    });
+  });
+
+
+
+
+
+
+
+
+
+
 
 });
 
