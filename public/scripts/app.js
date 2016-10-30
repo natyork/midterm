@@ -1,7 +1,7 @@
 
 $(function() {
 
-  function createResourceElement(resource) { //params are objects for info required
+  function createResourceElement(resource, modalid) { //params are objects for info required
     var $resource = $("<article>").addClass("resource grid-item col-sm-6 col-md-4");
     $resource.attr({"data-resourceid" : resource.id});
     var $thumbnail = $("<div>").addClass("thumbnail");
@@ -18,7 +18,29 @@ $(function() {
     $caption = $caption.append($title).append($description).append($iconHeart).append($visit).append($user).append($category);
     $thumbnail = $thumbnail.append($img).append($caption);
     $resource = $resource.append($thumbnail);
+    //insert comment button
+      $(`<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal${modalid}"">
+        Comment
+      </button>   <div class="modal fade" id="myModal${modalid}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
 
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">${resource.title}</h4>
+            </div>
+            <div class="modal-body thumbnail">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+      </div>
+    </div>`).insertAfter($category);
 
     return $resource;
   }
@@ -26,11 +48,12 @@ $(function() {
 
 
   function renderResources(arr) {
-
+    var modalid = 0;
     for (i in arr) {
       var resource = arr[i];
-      var $resource = createResourceElement(resource);
+      var $resource = createResourceElement(resource, modalid);
       $('.resource-row').prepend($resource);
+      modalid++;
     }
   }
 
