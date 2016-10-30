@@ -8,7 +8,6 @@ getLikedResources();
 
 
 
-
 function getUserInfo() {
   var userid = $(".user").data("id");
   $.ajax({
@@ -37,6 +36,7 @@ function getLikedResources() {
 
   });
 }
+
 
 });
 
@@ -75,7 +75,8 @@ function createResourceElement(resource, toggleState, admin, modalid) {
     var imgElm = $resource.find("img");
     $(`<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal${modalid}"">
         edit
-      </button>   <div class="modal fade" id="myModal${modalid}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      </button>
+      <div class="modal fade" id="myModal${modalid}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-resourceid="{resource.id}">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -84,21 +85,41 @@ function createResourceElement(resource, toggleState, admin, modalid) {
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">${resource.title}</h4>
+              <h4 class="modal-title" id="myModalLabel">Edit</h4>
             </div>
             <div class="modal-body thumbnail">
+            <h5 class="modal-title"> current image </h5>
               <img src="${resource.path}">
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+              <section>
+              <div class="form-control">
+                  <label for="title">Title</label>
+                  <input id="title" type="text" value="${resource.title}">
+              </div>
+              <div class="form-control">
+                  <label for="title">Url</label>
+                  <input id="url" type="text" value="${resource.url}">
+                  <span class="errorMessage alert alert-caution">Please Enter Valid Url!</span>
+              </div>
+              <div class="form-control">
+                  <label for="title">Thumbnail Url</label>
+                  <input id="thumburl" type="text" value="${resource.path}">
+                  <span class="errorMessage alert alert-caution">Please Enter Valid Url!</span>
+              </div>
+              <div class="form-control">
+                  <label for="title">Description</label>
+                  <input id="description" type="text" value="${resource.description}">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary resource-edit" onclick="editResource(event, ${resource.id})">Save changes </button>
+              </div>
+            </section>
         </div>
       </div>
     </div>`).insertAfter(imgElm);
   }
   return $resource;
 }
-
 
 

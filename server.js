@@ -24,6 +24,7 @@ const resourcesRoutes = require("./routes/resources");
 app.use(require('./routes/ajax/login'));
 app.use(require('./routes/ajax/home'));
 app.use(require('./routes/ajax/resource-like'));
+app.use(require('./routes/ajax/resource-edit'));
 app.use(require('./routes/ajax/resources-new'));
 app.use(require('./routes/ajax/user-home'));
 
