@@ -24,3 +24,11 @@ function setLike(event) {
     });
 
 }
+function setHeartColorStyle(resourceIn) {
+  var heart = resourceIn.find(".glyphicon-heart");
+  if(heart.data("istoggled") === true) {
+    heart.css("color", "red");
+  } else {
+    heart.css("color", "black");
+  }
+}
