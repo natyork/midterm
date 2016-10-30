@@ -102,13 +102,12 @@ router.get("/home/resources/new", (req, res) => {
   if(req.session["user-id"]) {
     let currentUserId = req.session["user-id"];
     userQuery.findUserById(currentUserId, (err, user) => {
-      //needs error handling but for now....
-      let templateVars = {
-        handle: user.handle,
-        avatar: user.avatar,
-        id: user.id
-      }
-    res.render("resources-new", templateVars);
+
+    res.render("resources-new", {
+      user: user.id,
+      handle: user.handle,
+      avatar: user.avatar
+    });
     });
   } else {
       //return user back to home if they are not logged in

@@ -17,6 +17,7 @@
 
   <script type="text/javascript" src="/scripts/dashboard.js"></script>
   <script type="text/javascript" src="/scripts/like.js"></script>
+  <script type="text/javascript" src="/scripts/resource-menu.js"></script>
 
 </head>
 
@@ -26,9 +27,7 @@
           <% include ./partials/_nav %>
     </header>
 
-
-
- <section  data-id="<%=user%>" class="jumbotron text-xs-center user">
+    <section  data-id="<%=user%>" class="jumbotron text-xs-center user">
       <div class="container">
         <h1 class="jumbotron-heading"></h1>
         <p class="lead text-muted">you have these many resources,
@@ -40,15 +39,16 @@
       </div>
     </section>
 
-<div class="album text-muted">
-  <div class="container">
-    <h1>My Resources</h1>
-    <div class="row resource-row"></div>
-    <h1>Liked Resources</h1>
-    <div class="row likes-row">
-
+    <div class="album text-muted">
+      <div class="container">
+        <h1>My Resources</h1>
+        <div class="row resource-row">
+        </div>
+        <h1>Liked Resources</h1>
+        <div class="row likes-row">
+        </div>
+      </div>
     </div>
-  </div>
   </main>
 </body>
 

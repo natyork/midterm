@@ -28,7 +28,6 @@ router.post("/login", (req, res) => {
   const pw = req.body.pw.trim();
   //sends a response object to obj
   const responseObj = new Object();
-
   if(email && pw) {
 
     db.findUserByCredentials(email, pw, (err, result) =>{

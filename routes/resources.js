@@ -60,14 +60,21 @@ module.exports = function (knex) {
   //get singular resource by id
   router.get("/:id", (req, res) => {
     knex
-      .select("*")
-      .from("resources").where({id: req.params.id})
+      .select("resources.*", "thumbnails.path", "categories.name")
+      .from("resources")
+      .innerJoin("thumbnails", "resources.id", "thumbnails.resource-id")
+      .innerJoin("categories", "resources.category-id", "categories.id")
+      .where({"resources.id": req.params.id})
       .then((results) => {
-        res.json(results);
+        if(req.session["user-id"] == results[0]["created-by"]) {
+          res.json(results[0]);
+        }
+        res.send("not autheticated");
     });
   });
-  //all resources per user
+  //all resources per user and set admin priviledges if true
   router.get("/user/:id", (req, res) => {
+    let responseObj = new Object();
     knex
       .select("resources.*", "thumbnails.path", "categories.name")
       .from("resources")
@@ -75,7 +82,13 @@ module.exports = function (knex) {
       .innerJoin("categories", "resources.category-id", "categories.id")
       .where({"created-by": req.params.id})
       .then((results) => {
-        res.json(results);
+        responseObj.resources = results;
+        if(req.session["user-id"] == req.params.id) {
+          responseObj.admin = true;
+        } else {
+          responseObj.admin = false;
+        }
+        res.json(responseObj);
     });
   });
 //get all  liked resources by userid
