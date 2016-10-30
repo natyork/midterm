@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router  = express.Router();
+const time = require('../lib/server/date-utils.js')
 
 module.exports = function (knex) {
 
@@ -19,7 +20,6 @@ module.exports = function (knex) {
     });
   });
 
-// start************************************************************************
 
   router.get("/filter", (req, res) => {
     let searchword = req.query.search.split(" ");
@@ -45,7 +45,24 @@ module.exports = function (knex) {
 
   });
 
+// start************************************************************************
 
+  router.get("/comment", (req, res) => {
+    let comment = req.query.comment;
+    console.log(comment);
+    console.log(time.makeTimestamp());
+    knex('comments')
+      .insert({ 'resource-id': 100, content: comment, 'created-at': time.makeTimestamp(), 'user-id': 100})
+      .then(() => {
+        knex
+          .select('*')
+          .from('comments')
+          .then((results)=>{
+            console.log(JSON.stringify(results));
+            res.json(results);
+          });
+        });
+  });
 
 // end************************************************************************
 

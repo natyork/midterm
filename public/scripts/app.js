@@ -30,9 +30,15 @@ $(function() {
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">${resource.title}</h4>
+              <h4 class="modal-title" id="myModalLabel">Comments for ${resource.title}</h4>
             </div>
             <div class="modal-body thumbnail">
+                <form action= "/api/resources/comment" method="GET" class="comment-form">
+                  <div class="form-group">
+                    <input type="comment" class="form-control" name = "comment" placeholder="Your comment here...">
+                  </div>
+                  <button type="submit" class="btn btn-default">Comment</button>
+              </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -94,7 +100,22 @@ $(function() {
     });
   });
 
+ $('.comment-form').on("submit", function(event) {
+    event.preventDefault();
 
+    var commentSubmit = $.ajax({
+      method: 'get',
+      url: '/api/resources/comment',
+      data: $(this).serialize(),
+      dataType: 'json'
+
+    });
+
+    commentSubmit.done(function(data){
+      // clearResources();
+      // renderComments(data);
+    });
+  });
 
 
 
