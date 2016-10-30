@@ -14,23 +14,42 @@ module.exports = function (knex) {
       .innerJoin("categories", "resources.category-id", "categories.id")
       .innerJoin("users", "resources.created-by", "users.id")
       .then((results) => {
+        // console.log(results);
         res.json(results);
     });
   });
 
-// ************************************************************************
+// start************************************************************************
 
   router.get("/filter", (req, res) => {
-    let search = req.query.search;
-    knex
-      .select("categories.*")
-      .from("categories").whereRaw('LOWER(categories.name) LIKE ?', '%'+search.toLowerCase()+'%')
-      .then((results) => {
+    let searchword = (req.query.search).split(" ");
+    console.log(searchword);
+    let query = knex
+      .select()
+      .from("categories")
+
+    // let condition = "";
+    // let escape =[]
+
+    for (var i in searchword) {
+
+      query.orWhere('categories.name', 'ILIKE', '%'+searchword[i]+'%')
+
+}
+
+
+
+      query.then((results) => {
+        //iterate over results to remove duplicates?
         res.json(results);
-        console.log(results);
-    });
+
+        console.log(results.toString());
+      });
+
   });
-// ************************************************************************
+
+
+// end************************************************************************
 
   router.get("/comments/:id", (req, res) => {
     knex
