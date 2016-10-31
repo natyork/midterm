@@ -111,8 +111,9 @@ function createResourceElement(resource, toggleState, admin, modalid) {
                   <input id="description" type="text" value="${resource.description}">
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button class="btn btn-primary resource-edit" onclick="editResource(event, ${resource.id})">Save changes </button>
+                <button class="btn btn-danger resource-delete" onclick="deleteResource(event, ${resource.id})">Delete Card</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </section>
         </div>
