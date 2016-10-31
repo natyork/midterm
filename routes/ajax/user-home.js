@@ -1,5 +1,5 @@
 "use strict";
-//==========Main landing page========//
+//==========User Dashboard========//
 
 
 //constants
@@ -11,7 +11,6 @@ const catQuery = require("../../lib/database/categories-queries.js");
 const resQuery = require("../../lib/database/resource-queries.js");
 const thumbQuery = require("../../lib/database/thumbnail-queries.js");
 const likeQuery = require("../../lib/database/like-queries.js");
-//const response = require("../../lib/server/response.js");
 const cookieSession = require('cookie-session');
 
 

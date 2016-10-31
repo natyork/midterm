@@ -1,5 +1,5 @@
 "use strict";
-//==========create new resources========//
+//==========edit resources========//
 
 
 //constants

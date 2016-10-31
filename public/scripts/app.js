@@ -2,6 +2,8 @@
 $(function() {
 
   function createResourceElement(resource, modalid) { //params are objects for info required
+
+    //creates resource element as well as its modal
     var $resource = $("<article>").addClass("resource grid-item col-sm-6 col-md-4");
     $resource.attr({"data-resourceid" : resource.id});
     var $thumbnail = $("<div>").addClass("thumbnail");
@@ -149,11 +151,6 @@ function clearComments(){
 
 
 // end ************************************************************
-
-
-
-
-
 
   loadResources();
 

@@ -1,13 +1,5 @@
 $(document).ready(function() {
 
-
-//get user
-getUserInfo();
-getLikedResources();
-
-
-
-
 function getUserInfo() {
   var userid = $(".user").data("id");
   $.ajax({
@@ -37,11 +29,17 @@ function getLikedResources() {
   });
 }
 
+//get user
+getUserInfo();
+getLikedResources();
+
+
+
+
+
 
 });
 
-//inserts a resource dom element into a parent with class of
-//parentClass
 function renderUserResources(arr, parentClass, toggleState, admin) {
   var modalid = 0;
   for (i in arr) {
@@ -52,6 +50,8 @@ function renderUserResources(arr, parentClass, toggleState, admin) {
     modalid++;
   }
 }
+//creates a resource element which contains a modal (pop up menu) element within
+//it
 function createResourceElement(resource, toggleState, admin, modalid) {
   var $resource = $(`<article class="col-sm-6 col-md-4"></article>`);
   $resource.attr({"data-resourceid" : resource.id});
