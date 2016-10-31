@@ -9,14 +9,12 @@ module.exports = function (knex) {
 //get all resources
   router.get("/", (req, res) => {
     knex
-      .select("resources.*", "thumbnails.path", "categories.name", "users.handle", "comments.content")
+      .select("resources.*", "thumbnails.path", "categories.name", "users.handle" )
       .from("resources")
       .innerJoin("thumbnails", "resources.id", "thumbnails.resource-id")
       .innerJoin("categories", "resources.category-id", "categories.id")
       .innerJoin("users", "resources.created-by", "users.id")
-      .leftOuterJoin("comments", "resources.id", "comments.resource-id")
       .then((results) => {
-        // console.log(results);
         res.json(results);
     });
   });
@@ -53,11 +51,6 @@ module.exports = function (knex) {
     let resourceid = req.query.resourceid;
 
     let user = req.session["user-id"];
-    console.log("***********TESTING START*********: ",comment);
-    console.log("COMMENT: ",comment);
-    console.log ("user: ", user);
-    console.log("resource: ",resourceid);
-    console.log("***********TESTING END*********: ",comment);
 
     console.log(time.makeTimestamp());
     knex('comments')

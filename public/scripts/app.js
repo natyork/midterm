@@ -52,10 +52,12 @@ $(function() {
     return $resource;
   }
 
+
   function createCommentElement(resource){
     var $comment = $("<div>").addClass("comment").text(resource.content);
     return $comment;
   }
+
 
   function renderComments(arr) {
 
@@ -77,9 +79,11 @@ $(function() {
     }
   }
 
+
   function clearResources(){
     $("article").remove();
   }
+
 
   function loadResources() {
     var allOfTheResources = $.ajax({
@@ -94,10 +98,6 @@ $(function() {
       renderResources(data);
     });
   }
-
-
-
-
 
 
  $('.search-form').on("submit", function(event) {
@@ -118,10 +118,10 @@ $(function() {
   });
 
 
-// ***********************************************
+// comment start ***********************************************
 
 
- // const commentMethods =require('../../lib/database/comment-insert-remove-edit.js')
+
 function clearComments(){
     $("div .comment").remove();
   }
@@ -148,13 +148,13 @@ function clearComments(){
 
 
 
-// ************************************************************
+// end ************************************************************
 
 
 
 
 
-  clearResources();
+
   loadResources();
 
 });
