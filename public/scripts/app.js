@@ -13,12 +13,12 @@ $(function() {
     var $visit = $("<a>").attr("href", resource.url).text("Link");
     var $user = $("<div>").addClass("user").text(resource.handle);
     var $category = $("<div>").addClass("category").text(`Category: ${resource.name}`);
-    // var $comments = $("<section>").addClass("comment-container"); //need to pull in comments
 
     $caption = $caption.append($title).append($description).append($iconHeart).append($visit).append($user).append($category);
     $thumbnail = $thumbnail.append($img).append($caption);
     $resource = $resource.append($thumbnail);
     //insert comment button
+
       $(`<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal${modalid}"">
         Comment
       </button>   <div class="modal fade" id="myModal${modalid}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -33,16 +33,17 @@ $(function() {
               <h4 class="modal-title" id="myModalLabel">Comments for ${resource.title}</h4>
             </div>
             <div class="modal-body thumbnail">
-                <form action= "/api/resources/comment" method="GET" class="comment-form">
+                <section>
                   <div class="form-group">
                     <input type="comment" class="form-control" name = "comment" placeholder="Your comment here...">
+                    <button type="button" class="comment-submit btn btn-default">Comment</button>
                   </div>
-                  <button type="submit" class="btn btn-default">Comment</button>
-              </form>
+                </section>
+
+              <section class='comment-container'></section>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
       </div>
@@ -51,6 +52,19 @@ $(function() {
     return $resource;
   }
 
+  // function createCommentElement(resource){
+  //   var $comment = $("<div>").addClass("comment").text(resource.content);
+  //   return $comment;
+  // }
+
+  // function renderComments(arr) {
+
+  //   for (i in arr) {
+  //     var comment = arr[i];
+  //     var $comment = createCommentElement(comment);
+  //     $('.comment-container').prepend($comment);
+  //   }
+  // }
 
 
   function renderResources(arr) {
@@ -59,7 +73,10 @@ $(function() {
       var resource = arr[i];
       var $resource = createResourceElement(resource, modalid);
       $('.resource-row').prepend($resource);
+      // var $comment = createCommentElement (resource);
+      // $('.comment-container').prepend($comment);
       modalid++;
+
     }
   }
 
@@ -100,25 +117,32 @@ $(function() {
     });
   });
 
- $('.comment-form').on("submit", function(event) {
-    event.preventDefault();
 
+// ***********************************************
+
+
+ // const commentMethods =require('../../lib/database/comment-insert-remove-edit.js')
+
+ $('.comment-submit').on("click", function(event) {
+    console.log("made it into the onclick function");
+    // event.preventDefault();
+    var resourceid = event.target.closest('article').data('resourceid');
+    var content = event.target.siblings('input').val();
     var commentSubmit = $.ajax({
       method: 'get',
       url: '/api/resources/comment',
-      data: $(this).serialize(),
-      dataType: 'json'
-
+      data: {
+        content: content,
+        resourceid: resourceid }
     });
 
-    commentSubmit.done(function(data){
-      // clearResources();
-      // renderComments(data);
+    commentSubmit.done(function(){
+        renderComments(data);
     });
   });
 
 
-
+// ************************************************************
 
 
 

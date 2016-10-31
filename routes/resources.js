@@ -9,11 +9,12 @@ module.exports = function (knex) {
 //get all resources
   router.get("/", (req, res) => {
     knex
-      .select("resources.*", "thumbnails.path", "categories.name", "users.handle")
+      .select("resources.*", "thumbnails.path", "categories.name", "users.handle", "comments.content")
       .from("resources")
       .innerJoin("thumbnails", "resources.id", "thumbnails.resource-id")
       .innerJoin("categories", "resources.category-id", "categories.id")
       .innerJoin("users", "resources.created-by", "users.id")
+      .leftOuterJoin("comments", "resources.id", "comments.resource-id")
       .then((results) => {
         // console.log(results);
         res.json(results);
@@ -45,18 +46,27 @@ module.exports = function (knex) {
 
   });
 
-// start************************************************************************
+// comments start************************************************************************
 
   router.get("/comment", (req, res) => {
-    let comment = req.query.comment;
-    console.log(comment);
+    let comment = req.body.comment;
+    let resourceid = req.body.resourceid;
+
+    let user = req.session["user-id"];
+    console.log("***********TESTING START*********: ",comment);
+    console.log("COMMENT: ",comment);
+    console.log ("user: ", user);
+    console.log("resource: ",resourceid);
+    console.log("***********TESTING END*********: ",comment);
+
     console.log(time.makeTimestamp());
     knex('comments')
-      .insert({ 'resource-id': 100, content: comment, 'created-at': time.makeTimestamp(), 'user-id': 100})
+      .insert({ 'resource-id': resourceid, content: comment, 'created-at': time.makeTimestamp(), 'user-id': user})
       .then(() => {
         knex
-          .select('*')
+          .select('comments.content', 'comments.resource-id')
           .from('comments')
+          .leftOuterJoin('resources', 'comments.resource-id', 'resources.id')
           .then((results)=>{
             console.log(JSON.stringify(results));
             res.json(results);
