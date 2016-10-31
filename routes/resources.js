@@ -49,8 +49,8 @@ module.exports = function (knex) {
 // comments start************************************************************************
 
   router.get("/comment", (req, res) => {
-    let comment = req.body.comment;
-    let resourceid = req.body.resourceid;
+    let comment = req.query.content;
+    let resourceid = req.query.resourceid;
 
     let user = req.session["user-id"];
     console.log("***********TESTING START*********: ",comment);
@@ -64,9 +64,9 @@ module.exports = function (knex) {
       .insert({ 'resource-id': resourceid, content: comment, 'created-at': time.makeTimestamp(), 'user-id': user})
       .then(() => {
         knex
-          .select('comments.content', 'comments.resource-id')
+          .select('comments.content')
           .from('comments')
-          .leftOuterJoin('resources', 'comments.resource-id', 'resources.id')
+          .where('comments.resource-id', resourceid)
           .then((results)=>{
             console.log(JSON.stringify(results));
             res.json(results);

@@ -52,19 +52,19 @@ $(function() {
     return $resource;
   }
 
-  // function createCommentElement(resource){
-  //   var $comment = $("<div>").addClass("comment").text(resource.content);
-  //   return $comment;
-  // }
+  function createCommentElement(resource){
+    var $comment = $("<div>").addClass("comment").text(resource.content);
+    return $comment;
+  }
 
-  // function renderComments(arr) {
+  function renderComments(arr) {
 
-  //   for (i in arr) {
-  //     var comment = arr[i];
-  //     var $comment = createCommentElement(comment);
-  //     $('.comment-container').prepend($comment);
-  //   }
-  // }
+    for (i in arr) {
+      var comment = arr[i];
+      var $comment = createCommentElement(comment);
+      $('.comment-container').prepend($comment);
+    }
+  }
 
 
   function renderResources(arr) {
@@ -123,11 +123,12 @@ $(function() {
 
  // const commentMethods =require('../../lib/database/comment-insert-remove-edit.js')
 
- $('.comment-submit').on("click", function(event) {
+ $(document).on("click", '.comment-submit', function(event) {
     console.log("made it into the onclick function");
-    // event.preventDefault();
-    var resourceid = event.target.closest('article').data('resourceid');
-    var content = event.target.siblings('input').val();
+    event.preventDefault();
+    var resourceidParent = $(this).closest('article')
+    var resourceid = resourceidParent.data('resourceid');
+    var content = $(this).siblings('input').val();
     var commentSubmit = $.ajax({
       method: 'get',
       url: '/api/resources/comment',
@@ -136,7 +137,8 @@ $(function() {
         resourceid: resourceid }
     });
 
-    commentSubmit.done(function(){
+    commentSubmit.done(function(data){
+        console.log(data)
         renderComments(data);
     });
   });
