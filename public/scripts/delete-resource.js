@@ -8,7 +8,7 @@ function deleteResource(event, resourceid) {
       method: "POST",
       url: `/home/resources/${resourceid}/delete`,
       data: {id: resourceid}
-    }).then(function(data) {
+    }).then(function(response) {
         if (response.resStatus !== 200) {
           $(".errorMessage")
           .toggle().children()

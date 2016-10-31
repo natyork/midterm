@@ -24,12 +24,25 @@ router.use(bodyParser.urlencoded({
 router.post("/home/resources/:id/delete", (req, res) => {
   if(req.session["user-id"]) {
     console.log("yes");
-    resourceObj = {
-      id: req.body.id,
-      "created-by": req.session["user-id"]
+    let responseObj = new Object();
+    let resourceObj = {
+      "resource-id": req.body.id,
+      "user-id": String(req.session["user-id"])
     }
     resQuery.deleteResource(resourceObj, (count) => {
-
+      if(count > 0) {
+        console.log("del resource");
+        likeQuery.removeLike(resourceObj, (count) => {
+          console.log("del like");
+          thumbQuery.deleteThumbnail(resourceObj, (count) => {
+            console.log("del thumbnail");
+            responseObj.resStatus = 200;
+            responseObj.msg = "del okay";
+            responseObj.url = "/home/user/" + req.session["user-id"];
+            res.json(responseObj);
+          });
+        });
+      }
     });
   } else {
     res.redirect(403, "/");
