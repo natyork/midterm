@@ -88,8 +88,9 @@ module.exports = function (knex) {
       .then((results) => {
         if(req.session["user-id"] == results[0]["created-by"]) {
           res.json(results[0]);
+        } else {
+          res.send("not autheticated");
         }
-        res.send("not autheticated");
     });
   });
   //all resources per user and set admin priviledges if true
