@@ -1,5 +1,5 @@
 "use strict";
-//==========create new resources========//
+//==========delete resource========//
 
 
 //constants
@@ -9,9 +9,8 @@ const bodyParser = require('body-parser');
 const likeQuery = require("../../lib/database/like-queries.js");
 const resQuery = require("../../lib/database/resource-queries.js");
 const thumbQuery = require("../../lib/database/thumbnail-queries.js");
-const catQuery = require("../../lib/database/categories-queries.js");
+const commentQuery = require("../../lib/database/comment-queries.js");
 
-//const response = require("../../lib/server/response.js");
 const cookieSession = require('cookie-session');
 
 
@@ -36,10 +35,11 @@ router.post("/home/resources/:id/delete", (req, res) => {
           console.log("del like");
           thumbQuery.deleteThumbnail(resourceObj, (count) => {
             console.log("del thumbnail");
-            responseObj.resStatus = 200;
-            responseObj.msg = "del okay";
-            responseObj.url = "/home/user/" + req.session["user-id"];
-            res.json(responseObj);
+              commentQuery.deleteComments(resourceObj, (count) =>{             responseObj.resStatus = 200;
+              responseObj.msg = "del okay";
+              responseObj.url = "/home/user/" + req.session["user-id"];
+              res.json(responseObj);
+            });
           });
         });
       }
@@ -49,8 +49,5 @@ router.post("/home/resources/:id/delete", (req, res) => {
   }
 
 });
-
-
-
 
 module.exports = router;

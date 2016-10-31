@@ -20,7 +20,8 @@ const usersRoutes = require("./routes/users");
 const resourcesRoutes = require("./routes/resources");
 
 
-
+//routes for any ajax calls made from client
+//creates a client -server , server-database, relationship
 app.use(require('./routes/ajax/login'));
 app.use(require('./routes/ajax/home'));
 app.use(require('./routes/ajax/resource-like'));
