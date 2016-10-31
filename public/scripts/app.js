@@ -17,7 +17,7 @@ $(function() {
     $caption = $caption.append($title).append($description).append($iconHeart).append($visit).append($user).append($category);
     $thumbnail = $thumbnail.append($img).append($caption);
     $resource = $resource.append($thumbnail);
-    //insert comment button
+    //comment button modal
 
       $(`<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal${modalid}"">
         Comment
@@ -73,11 +73,12 @@ $(function() {
       var resource = arr[i];
       var $resource = createResourceElement(resource, modalid);
       $('.resource-row').prepend($resource);
-      // var $comment = createCommentElement (resource);
-      // $('.comment-container').prepend($comment);
       modalid++;
-
     }
+  }
+
+  function clearResources(){
+    $("article").remove();
   }
 
   function loadResources() {
@@ -89,15 +90,14 @@ $(function() {
     });
 
     allOfTheResources.done(function(data) {
+      clearResources();
       renderResources(data);
     });
   }
 
-  loadResources();
 
-  function clearResources(){
-    $("article").remove();
-  }
+
+
 
 
  $('.search-form').on("submit", function(event) {
@@ -122,6 +122,9 @@ $(function() {
 
 
  // const commentMethods =require('../../lib/database/comment-insert-remove-edit.js')
+function clearComments(){
+    $("div .comment").remove();
+  }
 
  $(document).on("click", '.comment-submit', function(event) {
     console.log("made it into the onclick function");
@@ -138,10 +141,11 @@ $(function() {
     });
 
     commentSubmit.done(function(data){
-        console.log(data)
+        clearComments();
         renderComments(data);
     });
   });
+
 
 
 // ************************************************************
@@ -150,6 +154,8 @@ $(function() {
 
 
 
+  clearResources();
+  loadResources();
 
 });
 
