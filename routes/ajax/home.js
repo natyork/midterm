@@ -23,7 +23,7 @@ router.use(cookieSession({
 
 
 router.get("/home", (req, res) => {
-  // add validation
+  // note to self :add validation***
   if(req.session["user-id"]) {
     console.log(req.session["user-id"], "this is the id!\n\n\n");
      db.findUserById(req.session["user-id"],(err, user) => {

@@ -28,7 +28,7 @@ function clearFieldByVal(objIN) {
 }
 
 function checkValidUrl(urlIn) {
-  var regex = new RegExp(/(https?:\/\/)?(www)?\w?\w?\.\w+\.\w{2,3}/, 'i');
+  var regex = new RegExp(/(https?:\/\/)?(www)?\w?\w?\.\w+\.\w{2,4}/, 'i');
   var isValid = regex.test(urlIn)
   return isValid
 }

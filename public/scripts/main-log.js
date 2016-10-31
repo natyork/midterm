@@ -32,20 +32,6 @@ $(document).ready(function () {
           }
         });
     }
-
     clearFieldByVal(testObj);
-
-
   });
-  //sorts the cards loaded at /home according the the query string
-
-
-
-
-
-
-
-
-
-
 });
