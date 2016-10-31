@@ -16,7 +16,19 @@ const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
+
 const resourcesRoutes = require("./routes/resources");
+
+
+
+app.use(require('./routes/ajax/login'));
+app.use(require('./routes/ajax/home'));
+app.use(require('./routes/ajax/resource-like'));
+app.use(require('./routes/ajax/resource-edit'));
+app.use(require('./routes/ajax/resource-delete'));
+app.use(require('./routes/ajax/resource-new'));
+app.use(require('./routes/ajax/user-home'));
+
 
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -37,6 +49,7 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
+
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 app.use("/api/resources", resourcesRoutes(knex));
@@ -44,11 +57,14 @@ app.use("/api/resources", resourcesRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  if(req.session["user-id"]) {
+    res.redirect("/home");
+  } else {
+    res.render("index");
+  }
 });
-app.get("/home", (req, res) => {
-  res.send("home");
-});
+
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });

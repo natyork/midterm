@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>create resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+<body>
+  <main class="container">
+    <header>
+    <% include ./partials/_nav %>
+    </header>
+
+    <section>
+      <form class="resource-submit" action="/home/resources/new" >
+        <div class="form-control">
+           <label for="category">Category</label>
+           <input id="category" type="text" placeholder="category">
+        </div>
+        <div class="form-control">
+            <label for="title">Title</label>
+            <input id="title" type="text" placeholder="resource title">
+        </div>
+        <div class="form-control">
+            <label for="title">Url</label>
+            <input id="url" type="text" placeholder="www.myweb.com">
+            <span class="errorMessage alert alert-caution">Please Enter Valid Url!</span>
+        </div>
+        <div class="form-control">
+            <label for="title">Thumbnail Url</label>
+            <input id="thumburl" type="text" placeholder="www.google.com/myimage.png">
+            <span class="errorMessage alert alert-caution">Please Enter Valid Url!</span>
+        </div>
+        <div class="form-control">
+            <label for="title">Description</label>
+            <input id="description" type="text" placeholder="description">
+        </div>
+        <input class="btn btn-default" type="submit" name="" value="submit">
+      </form>
+    </section>
+
+
+
+  </main>
+
+
+  <script type="text/javascript" src="/scripts/new-resource.js"></script>
+  <script type="text/javascript" src="/scripts/utils/text-utils.js"></script>
+  <script type="text/javascript" src="/scripts/utils/form-submit.js"></script>
+
+</body>
+</html>
